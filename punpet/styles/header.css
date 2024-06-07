@@ -1,6 +1,6 @@
 header {
     width:100%;
-    padding: 28px 5%;
+    padding: 3px 5%;
     position: sticky;
     top: 0;
     background: linear-gradient(to top, #fff3d5, #ffb25f); 
@@ -114,4 +114,5 @@ html {
     }
 
 }
+
 

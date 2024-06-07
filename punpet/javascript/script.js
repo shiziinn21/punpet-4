@@ -11,7 +11,7 @@ $(document).ready(function() {
       var hash = this.hash;
       $('html, body').animate({
         scrollTop: $(hash).offset().top
-      }, 800, function(){ 
+      }, 400, function(){ 
         window.location.hash = hash; 
       });
     } 
@@ -41,4 +41,20 @@ $(document).ready(function() {
       navItems.find('a[href="#produtos"]').parent().addClass('active'); 
     }
   });
+  $('#cta_buttons a[href="#servicos"]').on('click', function(event) {
+    event.preventDefault();
+    $('html, body').animate({
+      scrollTop: $('#servicos').offset().top
+    }, 400); 
+  });
+$(window).on('scroll', function() {
+  $('.section-subtitle, .section-title, .title').each(function() {
+    var sectionTop = $(this).offset().top;
+    var windowTop = $(window).scrollTop();
+
+    if (windowTop >= sectionTop - 200) { 
+      $(this).addClass('active');
+    }
+  });
+});
 });
