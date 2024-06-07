@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="styles/menu.css">
     <link rel="stylesheet" href="styles/pets.css">
     <link rel="stylesheet" href="styles/servico.css"> 
+    <link rel="stylesheet" href="styles/cadastrar.css"> 
+    <link rel="stylesheet" href="styles/perfil.css">
 </head>
 <body>
     <header>
@@ -28,12 +30,13 @@
             <li class="nav-item">
                 <a href="#pets">Pets</a>
             </li>
-            <li class="nav-item">
-                <a href="#serviços">Serviços</a>
-            </li>
         </ul>
+        <button type="button" class="btn-login" onclick="window.location.href='perfil.html'">
+            <i class="fa-solid fa-user"></i>
+        </button>
+        
 
-        <button class="btn-default">Cadastre-se</button>
+        <button type="button" class="btn-default" onclick="window.location.href='cadastrar.html'">Sair</button>
 
         <button id="mobile_btn">
             <i class="fa-solid fa-bars"></i> 
@@ -51,12 +54,13 @@
                 <li class="nav-item">
                     <a href="#pets">Pets</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#serviços">Serviços</a>
-                </li>
             </ul>
 
-            <button class="btn-default">Cadastre-se</button>
+            <button type="button" class="btn-default" onclick="window.location.href='perfil.html'">
+                <i class="fa-solid fa-user"></i>
+            </button>
+
+            <button type="button" class="btn-default" onclick="window.location.href='cadastrar.html'">Sair</button>
     
         </div>
 
@@ -130,7 +134,7 @@
 
                         <div class="preco">
                             <h4>R$20.00</h4>
-                            <button class="btn-default">
+                            <button class="btn-default" onclick="adicionaraocarrinho(1)">
                                 <i class="fa-solid fa-basket-shopping"></i>
                             </button>
                         </div>
@@ -151,7 +155,7 @@
 
                         <div class="preco">
                             <h4>R$20.00</h4>
-                            <button class="btn-default">
+                            <button class="btn-default" onclick="adicionaraocarrinho(2)">
                                 <i class="fa-solid fa-basket-shopping"></i>
                             </button>
                         </div>
@@ -172,7 +176,7 @@
 
                         <div class="preco">
                             <h4>R$20.00</h4>
-                            <button class="btn-default">
+                            <button class="btn-default" onclick="adicionaraocarrinho(3)">
                                 <i class="fa-solid fa-basket-shopping"></i>
                             </button>
                         </div>
@@ -193,7 +197,7 @@
 
                         <div class="preco">
                             <h4>R$20.00</h4>
-                            <button class="btn-default">
+                            <button class="btn-default" onclick="adicionaraocarrinho(4)">
                                 <i class="fa-solid fa-basket-shopping"></i>
                             </button>
                         </div>
@@ -217,7 +221,7 @@
 
                         <div class="preco">
                             <h4>R$20.00</h4>
-                            <button class="btn-default">
+                            <button class="btn-default" onclick="adicionaraocarrinho(5)">
                                 <i class="fa-solid fa-basket-shopping"></i>
                             </button>
                         </div>
@@ -238,7 +242,7 @@
 
                         <div class="preco">
                             <h4>R$20.00</h4>
-                            <button class="btn-default">
+                            <button class="btn-default" onclick="adicionaraocarrinho(6)">
                                 <i class="fa-solid fa-basket-shopping"></i>
                             </button>
                         </div>
@@ -283,7 +287,7 @@
                     <p>Deixe seu pet cheiroso e com o visual impecável.</p>
                     
             
-                            <form method="post" action="{% url 'agendamentos:index' %}">
+                            <form method="post" action="">
                                 
                                 <div class="form-group">
                                     <label for="nome-pet">Nome do Pet:</label>
@@ -317,11 +321,13 @@
                                     <label for="observacoes">Observações:</label>
                                     <textarea id="observacoes" name="observacoes"></textarea>
                                 </div>
-                                <button type="submit" class="btn-agendar">Agendar</button> 
+                                <button type="submit" class="btn-default">Agendar</button> 
+                                <p>Faça login para agendar serviços.</p>
+                                <button type="button" class="btn-default" onclick="window.location.href='login.html'">Login</button>
                             </form>
                         
-                            <p>Faça login para agendar serviços.</p>
-                            <a href="{% url 'agendamentos:login' %}" class="btn-login">Login</a> 
+                            
+                            
                         
 
                 </div>
@@ -335,7 +341,25 @@
     </main>
 
 
-    <script src="javascript/script.js"></script>
+    <script src="javascript/script.js">
+    
+    function adicionarAoCarrinho(produtoId) {
+
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+
+        let produtoExistente = carrinho.find(item => item.id === produtoId);
+
+        if (produtoExistente) {
+            produtoExistente.quantidade++;
+        } else {
+            carrinho.push({ id: produtoId, quantidade: 1 }); 
+        }
+
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+
+        window.location.href = 'perfil.html'; 
+    }
+    </script>
 
 
 </body>
